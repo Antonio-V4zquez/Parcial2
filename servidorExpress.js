@@ -2,9 +2,15 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-// Este es el recurso que solicitaste
 app.get('/mi-recurso', (req, res) => {
     res.send('<h1>Servidor Express Activo</h1><p>Has navegado exitosamente a la ruta GET</p>');
+});
+
+// --- FUNCIÓN MANEJADORA DE ERRORES (Añade esto) ---
+// Debe ir después de todas tus rutas
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Muestra el error en la consola
+    res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
 app.listen(PORT, () => {
